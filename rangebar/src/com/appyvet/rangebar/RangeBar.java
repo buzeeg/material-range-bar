@@ -13,7 +13,7 @@
 
 package com.appyvet.rangebar;
 /*
- * Copyright 2014, Appyvet, Inc.
+ * Copyright 2015, Appyvet, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this work except in compliance with the License.
  * You may obtain a copy of the License in the LICENSE file, or at:
@@ -164,6 +164,15 @@ public class RangeBar extends View {
     private int mActiveTickColor;
 
     private int mActiveCircleColor;
+
+    //Used for ignoring vertical moves
+    private int mDiffX;
+
+    private int mDiffY;
+
+    private float mLastX;
+
+    private float mLastY;
 
     // Constructors ////////////////////////////////////////////////////////////
 
@@ -368,6 +377,11 @@ public class RangeBar extends View {
         switch (event.getAction()) {
 
             case MotionEvent.ACTION_DOWN:
+                mDiffX = 0;
+                mDiffY = 0;
+
+                mLastX = event.getX();
+                mLastY = event.getY();
                 onActionDown(event.getX(), event.getY());
                 return true;
 
@@ -380,6 +394,20 @@ public class RangeBar extends View {
             case MotionEvent.ACTION_MOVE:
                 onActionMove(event.getX());
                 this.getParent().requestDisallowInterceptTouchEvent(true);
+                final float curX = event.getX();
+                final float curY = event.getY();
+                mDiffX += Math.abs(curX - mLastX);
+                mDiffY += Math.abs(curY - mLastY);
+                mLastX = curX;
+                mLastY = curY;
+
+                if (mDiffX < mDiffY) {
+                    //vertical touch
+                    getParent().requestDisallowInterceptTouchEvent(false);
+                    return false;
+                } else {
+                    //horizontal touch (do nothing as it is needed for RangeBar)
+                }
                 return true;
 
             default:
@@ -1060,8 +1088,8 @@ public class RangeBar extends View {
      * @return boolean If the index is out of range.
      */
     private boolean valueOutOfRange(float leftThumbValue, float rightThumbValue) {
-        return (leftThumbValue < mTickStart || leftThumbValue >= mTickEnd
-                || rightThumbValue < mTickStart || rightThumbValue >= mTickEnd);
+        return (leftThumbValue < mTickStart || leftThumbValue > mTickEnd
+                || rightThumbValue < mTickStart || rightThumbValue > mTickEnd);
     }
 
     /**
@@ -1119,9 +1147,6 @@ public class RangeBar extends View {
             float leftThumbXDistance = mIsRangeBar ? Math.abs(mLeftThumb.getX() - x) : 0;
             float rightThumbXDistance = Math.abs(mRightThumb.getX() - x);
 
-            // Get the updated nearest tick marks for each thumb.
-            final int newLeftIndex = mIsRangeBar ? mBar.getNearestTickIndex(mLeftThumb) : 0;
-            final int newRightIndex = mBar.getNearestTickIndex(mRightThumb);
             if (leftThumbXDistance < rightThumbXDistance) {
                 if (mIsRangeBar) {
                     mLeftThumb.setX(x);
@@ -1132,6 +1157,9 @@ public class RangeBar extends View {
                 releasePin(mRightThumb);
             }
 
+            // Get the updated nearest tick marks for each thumb.
+            final int newLeftIndex = mIsRangeBar ? mBar.getNearestTickIndex(mLeftThumb) : 0;
+            final int newRightIndex = mBar.getNearestTickIndex(mRightThumb);
             // If either of the indices have changed, update and call the listener.
             if (newLeftIndex != mLeftIndex || newRightIndex != mRightIndex) {
 
