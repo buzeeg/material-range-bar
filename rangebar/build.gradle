@@ -1,7 +1,7 @@
 apply plugin: 'com.android.library'
 apply plugin: 'maven'
 apply plugin: 'signing'
-apply from: '../maven_push.gradle'
+//apply from: '../maven_push.gradle'
 
 version = "0.1"
 group = "com.appyvet"
@@ -12,7 +12,7 @@ android {
     buildToolsVersion "21.1.2"
 
     defaultConfig {
-        minSdkVersion 12
+        minSdkVersion 8
         targetSdkVersion 21
     }
 

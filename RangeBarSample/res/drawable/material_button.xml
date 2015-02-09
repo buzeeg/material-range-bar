@@ -4,17 +4,17 @@
     <!-- pressed state -->
     <item android:state_pressed="true">
         <inset xmlns:android="http://schemas.android.com/apk/res/android"
-               android:insetLeft="@dimen/button_inset_horizontal_material"
-               android:insetTop="@dimen/button_inset_vertical_material"
-               android:insetRight="@dimen/button_inset_horizontal_material"
-               android:insetBottom="@dimen/button_inset_vertical_material">
+               android:insetLeft="4dp"
+               android:insetTop="6dp"
+               android:insetRight="4dp"
+               android:insetBottom="6dp">
             <shape android:shape="rectangle">
-                <corners android:radius="@dimen/control_corner_material"/>
+                <corners android:radius="2dp"/>
                 <solid android:color="@color/accent"/>
-                <padding android:left="@dimen/button_padding_horizontal_material"
-                         android:top="@dimen/button_padding_vertical_material"
-                         android:right="@dimen/button_padding_horizontal_material"
-                         android:bottom="@dimen/button_padding_vertical_material"/>
+                <padding android:left="8dp"
+                         android:top="4dp"
+                         android:right="8dp"
+                         android:bottom="4dp"/>
             </shape>
         </inset>
     </item>
@@ -22,17 +22,17 @@
     <!-- focused state -->
     <item android:state_focused="true">
         <inset xmlns:android="http://schemas.android.com/apk/res/android"
-               android:insetLeft="@dimen/button_inset_horizontal_material"
-               android:insetTop="@dimen/button_inset_vertical_material"
-               android:insetRight="@dimen/button_inset_horizontal_material"
-               android:insetBottom="@dimen/button_inset_vertical_material">
+               android:insetLeft="4dp"
+               android:insetTop="6dp"
+               android:insetRight="4dp"
+               android:insetBottom="6dp">
             <shape android:shape="rectangle">
-                <corners android:radius="@dimen/control_corner_material"/>
+                <corners android:radius="2dp"/>
                 <solid android:color="@color/accent"/>
-                <padding android:left="@dimen/button_padding_horizontal_material"
-                         android:top="@dimen/button_padding_vertical_material"
-                         android:right="@dimen/button_padding_horizontal_material"
-                         android:bottom="@dimen/button_padding_vertical_material"/>
+                <padding android:left="8dp"
+                         android:top="4dp"
+                         android:right="8dp"
+                         android:bottom="4dp"/>
             </shape>
         </inset>
     </item>
@@ -40,17 +40,17 @@
     <!-- normal state -->
     <item>
         <inset xmlns:android="http://schemas.android.com/apk/res/android"
-               android:insetLeft="@dimen/button_inset_horizontal_material"
-               android:insetTop="@dimen/button_inset_vertical_material"
-               android:insetRight="@dimen/button_inset_horizontal_material"
-               android:insetBottom="@dimen/button_inset_vertical_material">
+               android:insetLeft="4dp"
+               android:insetTop="6dp"
+               android:insetRight="4dp"
+               android:insetBottom="6dp">
             <shape android:shape="rectangle">
-                <corners android:radius="@dimen/control_corner_material"/>
+                <corners android:radius="2dp"/>
                 <!--<solid android:color="@color/NORMAL_STATE_COLOR" />-->
-                <padding android:left="@dimen/button_padding_horizontal_material"
-                         android:top="@dimen/button_padding_vertical_material"
-                         android:right="@dimen/button_padding_horizontal_material"
-                         android:bottom="@dimen/button_padding_vertical_material"/>
+                <padding android:left="8dp"
+                         android:top="4dp"
+                         android:right="8dp"
+                         android:bottom="4dp"/>
             </shape>
         </inset>
     </item>
